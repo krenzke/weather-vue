@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// import HelloWorld from './components/HelloWorld.vue'
-// import TheWelcome from './components/TheWelcome.vue'
+import SearchBar from './components/SearchBar.vue'
 </script>
 
 <template>
@@ -10,7 +9,9 @@
       <p>It's just a weather app, keep it simple</p>
     </header>
 
-    <main>hello</main>
+    <main>
+      <SearchBar />
+    </main>
   </div>
 </template>
 
