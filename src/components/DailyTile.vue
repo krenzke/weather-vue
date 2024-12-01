@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import unixTimestampToString from '@/utils/unixTimestampToString'
+import { unixTimestampToDate } from '@/utils/unixTimestampFormat'
 import WeatherIcon, { type WeatherIconType } from './WeatherIcon.vue'
 
 const props = defineProps<{
@@ -14,7 +14,7 @@ const props = defineProps<{
 <template>
   <div class="tile">
     <div>
-      <h3 class="date">{{ unixTimestampToString(props.time) }}</h3>
+      <h3 class="date">{{ unixTimestampToDate(props.time) }}</h3>
       <p class="summary">{{ props.summary }}</p>
     </div>
     <div class="icon">

@@ -15,7 +15,14 @@ type DailyDataElement = {
   windSpeed: string
 }
 
-type HourlyDataElement = DailyDataElement
+type HourlyDataElement = {
+  time: number
+  temperature: number
+  summary: string
+  precipProbability: number
+  icon: WeatherIconType
+  windSpeed: string
+}
 
 type CurrentlyDataElement = {
   time: number
@@ -64,12 +71,10 @@ export const useWeatherForecastStore = defineStore('weatherForecast', () => {
   })
 
   async function fetchForecast() {
-    console.log('Fetching forecast for ', searchTerm.value)
     loading.value = true
     const data = (await fetch(
       `https://api.pirateweather.net/forecast/NZW4Rr82dgJLkcNmNEs4NnHDCpx4Ki1Z/33.844978,-118.387238`,
     ).then((response) => response.json())) as ApiResponse
-    console.log(data)
     apiResponse.value = data
     loading.value = false
   }

@@ -5,11 +5,10 @@ import HourlyForecastView from './components/HourlyForecastView.vue'
 import { onMounted, ref } from 'vue'
 import { useWeatherForecastStore } from './stores/weatherForecast'
 
-const forecastType = ref<'daily' | 'hourly'>('daily')
+const forecastType = ref<'daily' | 'hourly'>('hourly')
 const store = useWeatherForecastStore()
 
 onMounted(() => {
-  console.log('MOUNTED')
   store.searchTerm = '90277'
   store.fetchForecast()
 })
