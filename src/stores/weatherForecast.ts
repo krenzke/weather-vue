@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
+import { type WeatherIconType } from '@/components/WeatherIcon.vue'
 
 // const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
@@ -10,7 +11,7 @@ type DailyDataElement = {
   temperatureLow: number
   summary: string
   precipProbability: number
-  icon: string
+  icon: WeatherIconType
   windSpeed: string
 }
 
@@ -19,7 +20,7 @@ type HourlyDataElement = DailyDataElement
 type CurrentlyDataElement = {
   time: number
   apparentTemperature: number
-  icon: string
+  icon: WeatherIconType
   precipProbability: number
   summary: string
   temperature: number
@@ -32,12 +33,12 @@ type ApiResponse = {
   timezone: string
   currently: CurrentlyDataElement
   daily: {
-    icon: string
+    icon: WeatherIconType
     summary: string
     data: DailyDataElement[]
   }
   hourly: {
-    icon: string
+    icon: WeatherIconType
     summary: string
     data: HourlyDataElement[]
   }

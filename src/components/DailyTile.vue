@@ -1,0 +1,75 @@
+<script setup lang="ts">
+import unixTimestampToString from '@/utils/unixTimestampToString'
+import WeatherIcon, { type WeatherIconType } from './WeatherIcon.vue'
+
+const props = defineProps<{
+  time: number
+  summary: string
+  temperatureLow: number
+  temperatureHigh: number
+  icon: WeatherIconType
+}>()
+</script>
+
+<template>
+  <div class="tile">
+    <div>
+      <h3 class="date">{{ unixTimestampToString(props.time) }}</h3>
+      <p class="summary">{{ props.summary }}</p>
+    </div>
+    <div class="icon">
+      <WeatherIcon :icon="props.icon" />
+    </div>
+    <div class="temperatures">
+      <div>
+        <p>Low</p>
+        <p class="temperature">{{ props.temperatureLow }}</p>
+      </div>
+      <div>
+        <p>High</p>
+        <p class="temperature">{{ props.temperatureHigh }}</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+  & > div {
+    min-height: 0;
+  }
+}
+.date {
+  font-weight: 600;
+}
+.summary {
+  margin: 0.25rem 0;
+  font-style: italic;
+  color: #666;
+}
+.icon {
+  flex: 1;
+  /* min-height: 0; */
+  margin: 1rem 0;
+  text-align: center;
+}
+.temperatures {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > :last-child {
+    text-align: right;
+  }
+
+  .temperature {
+    font-weight: 600;
+    font-size: larger;
+  }
+}
+</style>

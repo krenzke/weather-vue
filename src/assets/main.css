@@ -34,7 +34,7 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
-  background-image: url('@/assets/weather.png');
+  background-image: url('@/assets/images/weather.png');
 }
 
 .container {
