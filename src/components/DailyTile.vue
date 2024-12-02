@@ -54,9 +54,11 @@ const props = defineProps<{
 }
 .icon {
   flex: 1;
-  /* min-height: 0; */
   margin: 1rem 0;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .temperatures {
   display: flex;

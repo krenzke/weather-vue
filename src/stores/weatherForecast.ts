@@ -70,6 +70,13 @@ export const useWeatherForecastStore = defineStore('weatherForecast', () => {
     return apiResponse.value.hourly.data
   })
 
+  const currentlyData = computed<CurrentlyDataElement | null>(() => {
+    if (apiResponse.value === null) {
+      return null
+    }
+    return apiResponse.value.currently
+  })
+
   async function fetchForecast() {
     loading.value = true
     const data = (await fetch(
@@ -79,5 +86,5 @@ export const useWeatherForecastStore = defineStore('weatherForecast', () => {
     loading.value = false
   }
 
-  return { searchTerm, fetchForecast, loading, dailyData, hourlyData }
+  return { searchTerm, fetchForecast, loading, dailyData, hourlyData, currentlyData }
 })

@@ -2,10 +2,11 @@
 import SearchBar from './components/SearchBar.vue'
 import DailyForecastView from './components/DailyForecastView.vue'
 import HourlyForecastView from './components/HourlyForecastView.vue'
+import CurrentWeatherView from './components/CurrentWeatherView.vue'
 import { onMounted, ref } from 'vue'
 import { useWeatherForecastStore } from './stores/weatherForecast'
 
-const forecastType = ref<'daily' | 'hourly'>('hourly')
+const forecastType = ref<'daily' | 'hourly'>('daily')
 const store = useWeatherForecastStore()
 
 onMounted(() => {
@@ -23,17 +24,30 @@ onMounted(() => {
 
     <main>
       <SearchBar />
-      <div class="forecast-type">
-        <button :class="{ active: forecastType === 'daily' }" @click="forecastType = 'daily'">
-          Daily
-        </button>
-        <button :class="{ active: forecastType === 'hourly' }" @click="forecastType = 'hourly'">
-          Hourly
-        </button>
+      <div class="flex-container">
+        <div class="current-view">
+          <CurrentWeatherView />
+        </div>
+        <div class="forecast-view">
+          <div class="forecast-header">
+            <p>Forecast</p>
+            <div class="forecast-type">
+              <button :class="{ active: forecastType === 'daily' }" @click="forecastType = 'daily'">
+                Daily
+              </button>
+              <button
+                :class="{ active: forecastType === 'hourly' }"
+                @click="forecastType = 'hourly'"
+              >
+                Hourly
+              </button>
+            </div>
+          </div>
+          <template v-if="store.loading"> Loading... </template>
+          <DailyForecastView v-else-if="forecastType === 'daily'" />
+          <HourlyForecastView v-else-if="forecastType === 'hourly'" />
+        </div>
       </div>
-      <template v-if="store.loading"> Loading... </template>
-      <DailyForecastView v-else-if="forecastType === 'daily'" />
-      <HourlyForecastView v-else-if="forecastType === 'hourly'" />
     </main>
   </div>
 </template>
@@ -52,7 +66,6 @@ header {
 .forecast-type {
   display: flex;
   align-items: center;
-  margin: 1rem 0;
   & > button {
     padding: 0.5rem 2rem;
     font-size: medium;
@@ -75,5 +88,33 @@ header {
       border-radius: 0 5px 5px 0;
     }
   }
+}
+.forecast-header {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  justify-content: center;
+  & > p {
+    font-weight: 600;
+    font-size: large;
+  }
+}
+
+.flex-container {
+  margin-top: 3rem;
+  display: flex;
+  gap: 2rem;
+  align-items: start;
+}
+
+.current-view {
+  flex: 1;
+  min-width: 0;
+}
+.forecast-view {
+  flex: 2;
+  min-width: 0;
+  container-type: inline-size;
 }
 </style>

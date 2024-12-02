@@ -6,10 +6,15 @@ const store = useWeatherForecastStore()
 </script>
 
 <template>
-  <div>Daily View</div>
   <div class="daily-view-grid">
     <div v-for="item in store.dailyData" :key="item.time">
-      <DailyTile v-bind="item" />
+      <DailyTile
+        :time="item.time"
+        :icon="item.icon"
+        :summary="item.summary"
+        :temperature-high="item.temperatureHigh"
+        :temperature-low="item.temperatureLow"
+      />
     </div>
   </div>
 </template>
@@ -17,9 +22,11 @@ const store = useWeatherForecastStore()
 <style scoped>
 .daily-view-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-columns: repeat(4, minmax(175px, 1fr));
   gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  @container (min-width: 34rem) {
+    grid-template-columns: repeat(4, 1fr);
+  }
   & > div {
     flex: 1;
     aspect-ratio: 1/1;
