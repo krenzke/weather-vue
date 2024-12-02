@@ -1,39 +1,16 @@
-# weather-vue
+# Simple Weather App
 
-This template should help get you started developing with Vue 3 in Vite.
+The usual weather sites I check are way too bloated with ads and UI junk I don't need. So I made a dead-simple weather app for myself. It shows the current weather, an 8-day forecast, and an hourly forecast. That's it. It works with any API that provides data in the [Pirate Weather API](https://pirateweather.net/en/latest/) format.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## Getting started
 
 ```sh
 yarn
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 yarn dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## Development
 
-```sh
-yarn build
-```
+The app is pretty small (which is kind of the point). It uses [Vue](https://vuejs.org/) for rendering, [Pinia](https://pinia.vuejs.org/) for state management, and [Chartjs](https://www.chartjs.org/) for a pretty chart or two.
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-yarn lint
-```
+The main app is contained in `src/App.vue`, which imports the few essential components. The one and only Pinia store is in `src/stores/weatherForecast.ts`. It is responsible for fetching data from the API and parsing it into easily-digestible chunks to be used by the view components.
