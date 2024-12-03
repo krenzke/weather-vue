@@ -3,8 +3,6 @@ import type { Ref } from 'vue'
 import { defineStore } from 'pinia'
 import { type WeatherIconType } from '@/components/WeatherIcon.vue'
 
-// const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
-
 type DailyDataElement = {
   time: number
   temperatureHigh: number
@@ -51,6 +49,8 @@ type ApiResponse = {
   }
 }
 
+const BASE_API_URL = import.meta.env.VITE_BASE_API_URL
+
 export const useWeatherForecastStore = defineStore('weatherForecast', () => {
   const searchTerm = ref('')
   const loading = ref(false)
@@ -79,9 +79,9 @@ export const useWeatherForecastStore = defineStore('weatherForecast', () => {
 
   async function fetchForecast() {
     loading.value = true
-    const data = (await fetch(
-      `https://api.pirateweather.net/forecast/NZW4Rr82dgJLkcNmNEs4NnHDCpx4Ki1Z/33.844978,-118.387238`,
-    ).then((response) => response.json())) as ApiResponse
+    const data = (await fetch(`${BASE_API_URL}${searchTerm.value}`).then((response) =>
+      response.json(),
+    )) as ApiResponse
     apiResponse.value = data
     loading.value = false
   }
