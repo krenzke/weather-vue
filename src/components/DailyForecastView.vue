@@ -14,6 +14,7 @@ const store = useWeatherForecastStore()
         :summary="item.summary"
         :temperature-high="item.temperatureHigh"
         :temperature-low="item.temperatureLow"
+        :precip-probability="item.precipProbability"
       />
     </div>
   </div>
@@ -23,9 +24,9 @@ const store = useWeatherForecastStore()
 .daily-view-grid {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   @container (min-width: 34rem) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   & > div {
     flex: 1;

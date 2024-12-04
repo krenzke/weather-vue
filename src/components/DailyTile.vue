@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { unixTimestampToDate } from '@/utils/unixTimestampFormat'
 import WeatherIcon, { type WeatherIconType } from './WeatherIcon.vue'
+import PrecipPredict from './PrecipitationPrediction.vue'
 
 const props = defineProps<{
   time: number
@@ -8,6 +9,7 @@ const props = defineProps<{
   temperatureLow: number
   temperatureHigh: number
   icon: WeatherIconType
+  precipProbability: number
 }>()
 </script>
 
@@ -24,6 +26,9 @@ const props = defineProps<{
       <div>
         <p>Low</p>
         <p class="temperature">{{ props.temperatureLow }}</p>
+      </div>
+      <div>
+        <PrecipPredict class="precipitation" :precip-probability="props.precipProbability" />
       </div>
       <div>
         <p>High</p>
@@ -62,6 +67,7 @@ const props = defineProps<{
 }
 .temperatures {
   display: flex;
+  gap: 0.5rem;
   justify-content: space-between;
   align-items: center;
 
@@ -72,6 +78,10 @@ const props = defineProps<{
   .temperature {
     font-weight: 600;
     font-size: larger;
+  }
+
+  .precipitation {
+    font-size: large;
   }
 }
 </style>

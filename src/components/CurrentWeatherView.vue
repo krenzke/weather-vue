@@ -3,6 +3,7 @@ import { useWeatherForecastStore } from '@/stores/weatherForecast'
 import { unixTimestampToString } from '@/utils/unixTimestampFormat'
 import { storeToRefs } from 'pinia'
 import WeatherIcon from './WeatherIcon.vue'
+import PrecipPrediction from './PrecipitationPrediction.vue'
 
 const store = useWeatherForecastStore()
 const { currentlyData: data } = storeToRefs(store)
@@ -17,7 +18,10 @@ const { currentlyData: data } = storeToRefs(store)
     <div class="icon">
       <WeatherIcon :icon="data.icon" />
     </div>
-    <div class="temperature">{{ data.temperature }} F</div>
+    <div class="temperature">
+      <span>{{ data.temperature }}&#x2109;</span>
+      <span>(<PrecipPrediction :precip-probability="data.precipProbability" />)</span>
+    </div>
   </div>
 </template>
 
@@ -46,8 +50,16 @@ const { currentlyData: data } = storeToRefs(store)
   text-align: center;
 }
 .temperature {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
   text-align: center;
   font-weight: 600;
   font-size: x-large;
+}
+
+.raindrops-image {
+  width: 35px;
+  height: 35px;
 }
 </style>
