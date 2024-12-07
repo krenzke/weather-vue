@@ -79,7 +79,7 @@ export const useWeatherForecastStore = defineStore('weatherForecast', () => {
 
   async function fetchForecast() {
     loading.value = true
-    const data = (await fetch(`${BASE_API_URL}${searchTerm.value}`).then((response) =>
+    const data = (await fetch(`${BASE_API_URL}/forecast/${searchTerm.value}`).then((response) =>
       response.json(),
     )) as ApiResponse
     apiResponse.value = data
